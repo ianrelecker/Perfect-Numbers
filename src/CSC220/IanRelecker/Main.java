@@ -9,6 +9,21 @@ public class Main {
         }
     }
 
+
+    public static long[] running(int amountToRun) {
+        long[] results = new long[amountToRun * 2 / 3];
+        int a = 0;
+        for (int i = 1; i < 20; i++) {
+            long perfect = getPerfect(i);
+            if (isPerfect(perfect)) {
+                results[a] = i;
+                a++;
+            }
+        }
+        return results;
+    }
+
+
     private static boolean isPerfect(long perfect) {
         long[] divisors = new long[999];
         int holder = 0;
@@ -39,3 +54,4 @@ public class Main {
         return ((long) Math.pow(2, i-1) * (long)(Math.pow(2, i) -1));
     }
 }
+
