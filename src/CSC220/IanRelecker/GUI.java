@@ -12,15 +12,19 @@ public class GUI extends JFrame {
     private final int width = 600;
     private final int height = 500;
     private int amountToRun;
-    private JFrame mainframe;
+    private MainPanel mainPanel;
 
-    public void BaseGUI(){
+    public GUI(){
         setTitle("Perfect #'s");
         setSize(width, height);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(5,5));
-//        mainframe = new MainPanel();
+        mainPanel = new MainPanel();
+        this.add(mainPanel, BorderLayout.CENTER);
+        setVisible(true);
+        mainPanel.setFocusable(true);
+        mainPanel.requestFocus();
     }
 
     public class MainPanel extends JPanel{
@@ -31,14 +35,26 @@ public class GUI extends JFrame {
         private JTextField numberToRun;
         private JScrollPane scrollPaneOutput;
 
+        private int numberint;
         private String statusThread = "";
 
         MainPanel(){
+            Thread a;
             perfectNumbers = new JButton("Perfect Numbers");
             perfectNumbers.addActionListener(
                     new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent e) {
-                            new Thread(new findNums(amountToRun));
+                            findNums finder = new findNums(numberint);
+                        }
+                    }
+            );
+            buttonStatus = new JButton("Status");
+            buttonStatus.addActionListener(
+                    new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+
                         }
                     }
             );
@@ -47,13 +63,13 @@ public class GUI extends JFrame {
             fieldStatus = new JTextField(statusThread, 8);
 
             this.add(perfectNumbers);
-            this.add(buttonStatus);
-            this.add(fieldStatus);
-            this.add(numberToRun);
+//            this.add(buttonStatus);
+//            this.add(fieldStatus);
+//            this.add(numberToRun);
 
-            scrollPaneOutput.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-            scrollPaneOutput.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            this.add(scrollPaneOutput);
+//            scrollPaneOutput.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+//            scrollPaneOutput.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//            this.add(scrollPaneOutput);
         }
     }
 
