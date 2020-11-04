@@ -2,26 +2,15 @@ package CSC220.IanRelecker;
 
 public class Main {
 
-    public static void main(String[] args) {
-        for (int i=1; i<20; i++){
-            long perfect = getPerfect(i);
-            System.out.println(i + " " + perfect + " " + isPerfect(perfect));
-        }
-    }
+//    public static void main(String[] args) {
+//        for (int i=1; i<20; i++){
+//            long perfect = getPerfect(i);
+//            System.out.println(i + " " + perfect + " " + isPerfect(perfect));
+//        }
+//    }
 
 
-    public static long[] running(int amountToRun) {
-        long[] results = new long[amountToRun * 2 / 3];
-        int a = 0;
-        for (int i = 1; i < 20; i++) {
-            long perfect = getPerfect(i);
-            if (isPerfect(perfect)) {
-                results[a] = i;
-                a++;
-            }
-        }
-        return results;
-    }
+
 
 
     private static boolean isPerfect(long perfect) {

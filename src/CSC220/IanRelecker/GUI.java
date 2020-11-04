@@ -1,6 +1,7 @@
 package CSC220.IanRelecker;
 
 import javax.swing.*;
+import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +11,7 @@ import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
 
-    public static final long serialVersionUID = 1L;
-
-    private final int width = 500;
+    private final int width = 100;
     private final int height = 600;
     private int amountToRun;
     private MainPanel mainPanel;
@@ -34,29 +33,30 @@ public class GUI extends JFrame {
 
         private JButton perfectNumbers;
         private JButton buttonStatus;
-        private JTextField fieldStatus;
-        private JTextField numberToRun;
+        private JTextArea fieldStatus;
+        private JTextArea numberToRun;
         private JScrollPane scrollPaneOutput;
         private JTextArea textArea;
 
-        private int numberInt;
+        private int numberInt = 0;
         private String statusThread = "";
         private long[] results;
         private findNums finder;
         private Thread.State state;
 
-
+//call start not run for the thread
         MainPanel(){
             perfectNumbers = new JButton("Perfect Numbers");
             perfectNumbers.addActionListener(
                     new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            findNums finder = new findNums(numberInt);
+
+
+                            finder = new findNums(amountToRun, fieldStatus);
                             results = finder.getResults();
-                            for (int i=0; i<results.length; i++) {
-                                textArea.append(String.valueOf(results[i]));
-                            }
+
+
                         }
                     }
             );
@@ -74,10 +74,13 @@ public class GUI extends JFrame {
             );
 
 
-            setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-            fieldStatus = new JTextField(statusThread, 6);
-            numberToRun = new JTextField(statusThread, 6);
+//            setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+            setLayout(new FlowLayout());
+//            textfield into a text area
+            fieldStatus = new JTextArea("                        ");
+            numberToRun = new JTextArea("                        ");
             textArea = new JTextArea(7,8);
+            scrollPaneOutput = new JScrollPane();
             scrollPaneOutput.add(textArea);
             this.add(perfectNumbers);
             this.add(buttonStatus);
