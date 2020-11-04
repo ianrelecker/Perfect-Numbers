@@ -2,18 +2,7 @@ package CSC220.IanRelecker;
 
 public class Main {
 
-//    public static void main(String[] args) {
-//        for (int i=1; i<20; i++){
-//            long perfect = getPerfect(i);
-//            System.out.println(i + " " + perfect + " " + isPerfect(perfect));
-//        }
-//    }
-
-
-
-
-
-    private static boolean isPerfect(long perfect) {
+    public static boolean isPerfect(long perfect) {
         long[] divisors = new long[999];
         int holder = 0;
         boolean through = false;
@@ -39,7 +28,7 @@ public class Main {
         }
     }
 
-    private static long getPerfect(long i) {
+    public static long getPerfect(long i) {
         return ((long) Math.pow(2, i-1) * (long)(Math.pow(2, i) -1));
     }
 }

@@ -5,43 +5,27 @@ import javax.swing.*;
 public class findNums extends Thread{
     private int amt;
     public long[] results;
-    private JTextArea statusfield;
+    private JTextArea textArea;
 
-    public findNums(int amountToRun, JTextArea statusField) {
+    public findNums(int amountToRun, JTextArea textArea) {
         this.amt = amountToRun;
-        this.statusfield = statusField;
+        this.textArea = textArea;
     }
-        //may need to add long[] something to get the values out
-//        Main.running(amountToRun);
+
+
     public void run(){
-
-        //fix all of this
-        //num of results loop.
-        /*
-        results = Main.running(amt);
-        for (int i = 0; i < results.length; i++) {
-            textArea.append(String.valueOf(results[i]) + "\n");
-        }
-
-
-        public static long[] running(int amountToRun) {
-            long[] results = new long[amountToRun * 2 / 3];
-            int a = 0;
-            for (int i = 1; i < 20; i++) {
-                long perfect = getPerfect(i);
-                if (isPerfect(perfect)) {
-                    results[a] = i;
-                    a++;
-                }
+        int a = 0;
+        int b = 0;
+        while (amt >= b){
+            long perfect = Main.getPerfect(a+1);
+            System.out.print(perfect);
+            if (Main.isPerfect(perfect)) {
+                textArea.append(perfect + "\n");
+                b++;
             }
-            return results;
-
-         */
-
+            a++;
+        }
     }
 
-    public long[] getResults(){
-        return results;
-    }
 
 }

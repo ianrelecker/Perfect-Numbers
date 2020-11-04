@@ -35,14 +35,15 @@ public class GUI extends JFrame {
         private JButton buttonStatus;
         private JTextArea fieldStatus;
         private JTextArea numberToRun;
+        private JTextField fieldStatusF;
+        private JTextField numberToRunF;
         private JScrollPane scrollPaneOutput;
         private JTextArea textArea;
 
         private int numberInt = 0;
         private String statusThread = "";
-        private long[] results;
+
         private findNums finder;
-        private Thread.State state;
 
 //call start not run for the thread
         MainPanel(){
@@ -51,12 +52,15 @@ public class GUI extends JFrame {
                     new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-
-
-                            finder = new findNums(amountToRun, fieldStatus);
-                            results = finder.getResults();
-
-
+                            textArea.setText("");
+                            try {
+                                amountToRun = Integer.parseInt(String.valueOf(numberToRun.getText()));
+                                System.out.println(amountToRun +1 );
+                            }catch (NumberFormatException a){
+                                System.out.print("error");
+                            }
+                            finder = new findNums(amountToRun, textArea);
+                            finder.start();
                         }
                     }
             );
@@ -65,23 +69,32 @@ public class GUI extends JFrame {
                     new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            state = finder.getState();
-//                            fieldStatus.setEditable(true);
-                            fieldStatus.setText(String.valueOf(state));
-//                            fieldStatus.setEditable(false);
+                            try {
+                                fieldStatus.setEditable(true);
+                                fieldStatus.setText(String.valueOf(finder.getState()));
+                                fieldStatus.setEditable(false);
+                            }catch (NullPointerException a){
+                                fieldStatus.setEditable(true);
+                                fieldStatus.setText("               null                         ");
+                                fieldStatus.setEditable(false);
+                            }
                         }
                     }
             );
 
 
-//            setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+//            setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
             setLayout(new FlowLayout());
 //            textfield into a text area
-            fieldStatus = new JTextArea("                        ");
-            numberToRun = new JTextArea("                        ");
+            fieldStatus = new JTextArea("                                            ");
+            numberToRun = new JTextArea("ENTER NUMBER TO RUN HERE");
             textArea = new JTextArea(7,8);
+            textArea.setSize(200,200);
             scrollPaneOutput = new JScrollPane();
+
+            scrollPaneOutput.setPreferredSize(new Dimension(200,200));
             scrollPaneOutput.add(textArea);
+            fieldStatus.setEditable(false);
             this.add(perfectNumbers);
             this.add(buttonStatus);
             this.add(fieldStatus);
